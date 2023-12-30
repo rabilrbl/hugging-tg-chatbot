@@ -37,6 +37,7 @@ Chat commands:
 /new - Start a new chat session (model will forget previously generated messages)
 /model - Change the model used to generate responses.
 /system_prompt - Change the system prompt used for new chat sessions.
+/info - Get info about the current chat session.
 
 Send a message to the bot to generate a response.
 """
