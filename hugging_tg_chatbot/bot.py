@@ -19,6 +19,7 @@ from hugging_tg_chatbot.handlers import (
     start_system_prompt,
     get_system_prompt,
     cancelled_system_prompt,
+    info_command_handler
 )
 from hugging_tg_chatbot.filters import AuthFilter, MessageFilter
 from dotenv import load_dotenv
@@ -33,6 +34,7 @@ def start_bot():
     app.add_handler(CommandHandler("help", help_command, filters=AuthFilter))
     app.add_handler(CommandHandler("new", new_command_handler, filters=AuthFilter))
     app.add_handler(CommandHandler("model", model_command_handler, filters=AuthFilter))
+    app.add_handler(CommandHandler("info", info_command_handler, filters=AuthFilter))
     
     app.add_handler(
         ConversationHandler(

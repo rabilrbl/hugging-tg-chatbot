@@ -74,7 +74,7 @@ async def change_model_callback_handler(update: Update, context: ContextTypes.DE
 
 async def start_system_prompt(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Start a system prompt"""
-    await update.message.reply_text("Send me a system prompt.")
+    await update.message.reply_text("Send me a system prompt. If you want to clear the system prompt, send `clear` now.")
     return SYSTEM_PROMPT_SP
     
     
@@ -86,8 +86,13 @@ async def cancelled_system_prompt(update: Update, context: ContextTypes.DEFAULT_
 async def get_system_prompt(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Get the system prompt"""
     system_prompt = update.message.text
-    context.chat_data["system_prompt"] = system_prompt
-    await update.message.reply_text("System prompt changed.")
+    if system_prompt.lower().strip() == "clear":
+        context.chat_data["system_prompt"] = ""
+        await update.message.reply_text("System prompt cleared.")
+    else:
+        context.chat_data["system_prompt"] = system_prompt
+        await update.message.reply_text("System prompt changed.")
+    new_chat(context)
     return ConversationHandler.END
     
     
@@ -114,4 +119,18 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         if message:
             full_output_message += message
             send_message = format_message(full_output_message)
-            init_msg = await init_msg.edit_text(send_message, parse_mode=ParseMode.HTML)
+            init_msg = await init_msg.edit_text(send_message, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+            
+
+async def info_command_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Get info about the bot"""
+    info = chatbot.get_conversation_info()
+    message = f"""**__Conversation Info:__**
+
+**ID**: `{info.id}`
+**Title**: `{info.title}`
+**Model**: `{info.model}`
+"""
+    if info.system_prompt:
+        message += f"\n**System Prompt**: \n```\n{info.system_prompt}\n```"
+    await update.message.reply_text(format_message(message), parse_mode=ParseMode.HTML)
