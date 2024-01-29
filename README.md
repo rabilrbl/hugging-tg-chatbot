@@ -24,7 +24,6 @@
 
 * Python 3.10+
 * Telegram Bot API token
-* Google `gemini-pro` API key
 * dotenv (for environment variables)
 
 
