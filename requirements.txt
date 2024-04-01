@@ -2,7 +2,7 @@ anyio==4.3.0
 certifi==2024.2.2
 charset-normalizer==3.3.2
 h11==0.14.0
-httpcore==1.0.4
+httpcore==1.0.5
 httpx==0.26.0
 hugchat==0.4.1
 idna==3.6
