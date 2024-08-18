@@ -22,7 +22,7 @@ def generate_response(message: str):
     response_queue = ""
     for resp in chatbot.chat(
         message,
-        stream=True
+        _stream_yield_all=True
     ):
         if resp:
             response_queue += resp["token"]
