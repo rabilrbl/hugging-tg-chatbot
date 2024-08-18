@@ -20,7 +20,7 @@ chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 def generate_response(message: str):
     """Generate a response to a message"""
     response_queue = ""
-    for resp in chatbot.query(
+    for resp in chatbot.chat(
         message,
         stream=True
     ):
