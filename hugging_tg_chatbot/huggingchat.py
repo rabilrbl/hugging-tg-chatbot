@@ -25,7 +25,8 @@ def generate_response(message: str):
         _stream_yield_all=True
     ):
         if resp:
-            response_queue += resp["token"]
+            if "token" in resp:
+                response_queue += resp["token"]
         if len(response_queue) > 100:
             yield response_queue
             response_queue = ""
