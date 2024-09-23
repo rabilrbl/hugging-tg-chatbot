@@ -4,7 +4,7 @@ charset-normalizer==3.3.2
 h11==0.14.0
 httpcore==1.0.5
 hugchat==0.4.11
-idna==3.8
+idna==3.10
 python-dotenv==1.0.1
 python-telegram-bot==21.5
 requests==2.32.3
